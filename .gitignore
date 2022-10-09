@@ -47,3 +47,11 @@ vignettes/*.pdf
 *.odt
 *.pdf
 *.zip
+*.tif
+*.tiff
+*.shp
+*.dbf
+*.shx
+*.rds
+*.stversion
+*.sync-*
