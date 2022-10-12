@@ -1,13 +1,3 @@
-#Setup the environment
-#Load packages
-pacman::p_load(tidyverse,
-               foreach,
-               taxize,
-               rscopus,
-               microdemic,
-               easyPubMed,
-               rentrez)
-
 #TBE and Tank-bromeliad genera
 genus <- readRDS("genus.rds")
 
