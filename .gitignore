@@ -55,3 +55,4 @@ vignettes/*.pdf
 *.rds
 *.stversion
 *.sync-*
+secrets.R

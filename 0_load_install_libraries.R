@@ -9,6 +9,9 @@ pacman::p_load(tidyverse,
                rentrez,
                RSQLite)
 
+#Load api keys and other secrets
+source("secrets.R")
+
 #Function to keep a lightweight workspace
 send2sqlite <- function(con, dataframe,tables = F){
   RSQLite::dbWriteTable(conn = con,
