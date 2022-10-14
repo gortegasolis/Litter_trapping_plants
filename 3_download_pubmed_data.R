@@ -52,18 +52,10 @@ send2sqlite(condb, "pubmed_df", tables = T)
 
 # Replace with an SQL query
 pubmed_df <- function() {
-<<<<<<< HEAD
   dbGetQuery(
     condb,
     "SELECT * FROM tbl_pubmed_df"
   )
-=======
-  dbSendQuery(
-    condb,
-    "SELECT * FROM tbl_pubmed_df"
-  ) %>%
-    dbFetch()
->>>>>>> 445e7adbb0199fa17b2e33daea61c06df6d18502
 }
 
 pubmed_df() %>% glimpse()
