@@ -1,15 +1,10 @@
-#TBE and Tank-bromeliad genera
-genus <- readRDS("genus.rds")
-
 #Filter epilist by families with TBE species
-lista_sp <- read_delim(
-  "EpiList Final revised.csv",
-  delim = ";",
-  escape_double = FALSE,
-  trim_ws = TRUE
-) %>%
-  filter(coalesce(Hemi != "H", TRUE)) %>%
-  filter(Genus %in% genus) %>%
-  pull(., "Species") %>% as.list()
+dbListTables(condb)
+dbListFields(condb, "tbl_Initial_species_list")
 
-saveRDS(lista_sp, "lista_sp.rds")
+lista_sp <- function(){dbSendQuery(condb,
+                        "SELECT *
+                        FROM tbl_Initial_species_list") %>%
+  dbFetch()}
+
+lista_sp() %>% select(Genus, Epithet) %>% glimpse()
