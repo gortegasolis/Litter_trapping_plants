@@ -8,8 +8,12 @@ pacman::p_load(
   microdemic,
   easyPubMed,
   rentrez,
+<<<<<<< HEAD
   RSQLite,
   rgee
+=======
+  RSQLite
+>>>>>>> 445e7adbb0199fa17b2e33daea61c06df6d18502
 )
 
 # Load api keys and other secrets

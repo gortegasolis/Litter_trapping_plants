@@ -102,10 +102,18 @@ send2sqlite(condb, "scopus_df", tables = T)
 
 # Replace with an SQL query
 scopus_df <- function() {
+<<<<<<< HEAD
   dbGetQuery(
     condb,
     "SELECT * FROM tbl_scopus_df"
   )
+=======
+  dbSendQuery(
+    condb,
+    "SELECT * FROM tbl_scopus_df"
+  ) %>%
+    dbFetch()
+>>>>>>> 445e7adbb0199fa17b2e33daea61c06df6d18502
 }
 
 scopus_df() %>% glimpse()
