@@ -18,5 +18,5 @@ We identified 120 publications describing 209 species of TBE. Most TBE belong to
 Conclusions:
 TBE are a compelling group of model organisms that can be used to study ecological processes such as facilitation cascades, niche construction, extended phenotypes, or the effects of secondary FS on biodiversity and ecosystem functioning. TBE should also be included in forest management plans to enhance the availability of microhabitats in the canopy supporting its associated flora and fauna.
 
-Competing Interest Statement
+Competing Interest Statement: 
 The authors have declared no competing interest.
