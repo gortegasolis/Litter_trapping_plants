@@ -11,9 +11,6 @@ pacman::p_load(
   RSQLite
 )
 
-# Load api keys and other secrets
-source("secrets.R")
-
 # Function to keep a lightweight workspace
 send2sqlite <- function(con, dataframe, tables = F) {
   RSQLite::dbWriteTable(
