@@ -1,18 +1,17 @@
 # Setup the environment
 # Load packages
 pacman::p_load(
-  tidyverse,
   foreach,
   taxize,
   rscopus,
   microdemic,
   easyPubMed,
   rentrez,
-  RSQLite
+  RSQLite,
+  stringi
 )
 
-# Load api keys and other secrets
-source("secrets.R")
+pacman::p_load(tidyverse)
 
 # Function to keep a lightweight workspace
 send2sqlite <- function(con, dataframe, tables = F) {
