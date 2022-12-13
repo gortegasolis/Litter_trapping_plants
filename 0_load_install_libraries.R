@@ -8,7 +8,12 @@ pacman::p_load(
   easyPubMed,
   rentrez,
   RSQLite,
-  stringi
+  stringi,
+  WorldFlora,
+  sf,
+  rgbif,
+  CoordinateCleaner,
+  parallel
 )
 
 pacman::p_load(tidyverse)
@@ -35,7 +40,7 @@ condb <- dbConnect(RSQLite::SQLite(), "LTEp.sqlite")
 dbGetInfo(condb)
 # dbDisconnect(condb)
 
-# readxl::excel_sheets("LTE_records_database.xlsx")
+readxl::excel_sheets("LTE_records_database.xlsx")
 
 # for (x in readxl::excel_sheets("LTE_records_database.xlsx")){
 #   temp <- readxl::read_xlsx("LTE_records_database.xlsx",
@@ -44,3 +49,6 @@ dbGetInfo(condb)
 #   send2sqlite(condb, x)
 #   rm(temp)
 # }
+
+# Dirty fix for problems with new spherical geometry in sf
+sf_use_s2(FALSE)
