@@ -29,11 +29,14 @@ clean_gbif <- function(import = NA, polygons_lst) {
     st_as_sf(., coords = c("decimalLongitude", "decimalLatitude")) %>%
     select(scientificName, family, starts_with("."))
 
+  #Set crs
   st_crs(gbif_data) <- 4326
 
+  #Reproject to polygons crs
   gbif_data <- st_transform(gbif_data,st_crs(polygons_lst))
 
-  gbif_data <- lapply(unique(gbif_data$scientificName), function(x) {
+  #Remove points outside native ranges
+  gbif_data <- mclapply(unique(gbif_data$scientificName), function(x) {
     gbif_filtered <- filter(gbif_data, scientificName == x) %>%
       st_make_valid()
     polygons_filtered <- filter(polygons_lst, scientificName == x)
@@ -41,10 +44,11 @@ clean_gbif <- function(import = NA, polygons_lst) {
     if (NROW(res) > 0) {
       return(res)
     }
-  }) %>% data.table::rbindlist(fill = T) %>%
+  }, mc.cores = 20) %>% data.table::rbindlist(fill = T) %>%
     st_as_sf(., sf_column_name = "geometry") %>%
     select(scientificName, family, starts_with("."))
 
+  #Re-set crs
   st_crs(gbif_data) <- st_crs(polygons_lst)
 
   return(gbif_data)

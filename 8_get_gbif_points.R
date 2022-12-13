@@ -33,9 +33,34 @@ source("func_GBIF_clean_pipeline.R")
 gbif_points <- clean_gbif(import = "GBIF/0193282-220831081235567.zip",
                           polygons_lst = powo_dist)
 
-#Export to shapefile
-st_write(gbif_data, "gbif_data.shp")
+#Double check flagged points in tmap
+tmp_bad <- gbif_points %>% filter(.summary == F)
 
+tmap_mode("view") #Easy interactive view
+tmap_options(max.categories = length(unique(tmp_bad$scientificName)))
+
+tm_shape(tmp_bad) +
+  tm_symbols(col = "scientificName")
+
+View(tmp_bad)
+
+#Clean dataset
+gbif_clean <- gbif_points %>%
+  filter(!.summary == F) %>%
+  select(!starts_with(".")) %>%
+  group_by(scientificName) %>%
+  summarise()
+
+#Intersect with WWF ecoregions
 sp_ecoregion <- readRDS("wwf_completo.rds") %>%
   st_as_sf() %>%
-  st_intersection(gbif_data)
+  st_intersection(gbif_clean)
+
+st_drop_geometry(sp_ecoregion) %>% View()
+
+#Check richness per Ecoregion
+st_drop_geometry(sp_ecoregion) %>%
+  select(ECO_NAME,scientificName) %>%
+  unique() %>%
+  group_by(ECO_NAME) %>%
+  summarise(Richness = n()) %>% View()
